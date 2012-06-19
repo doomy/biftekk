@@ -18,8 +18,13 @@ class dbHandler {
         else
             $desc = '';
         $sql = "SELECT $columns FROM $table $order_by $desc LIMIT 1;";
-        $result = mysql_query($sql, $this->connection);
+        $result = $this->query($sql);
         return mysql_fetch_assoc($result);
     }
+
+    private function query($sql) {
+        return mysql_query($sql, $this->connection);
+    }
+
 }
 ?>
