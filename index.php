@@ -3,7 +3,7 @@
     include('lib/db_handler.php');
 
     $dbh = new dbHandler();
-    $connection = $dbh->initialize($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+    $dbh->initialize($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
     $action = $_REQUEST['action'];
     switch ($action) {
         case 'actual':
