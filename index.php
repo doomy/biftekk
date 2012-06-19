@@ -6,7 +6,7 @@
     $action = $_REQUEST['action'];
     switch ($action) {
         case 'actual':
-            $content_template = 'actual';
+            $module = $content_template = 'actual';
         break;
         case 'archiv':
             $content_template = 'archiv';
@@ -16,5 +16,6 @@
         break;
     }
 
+    if (isset($module)) include ("inc/$module.php");
     include ('templates/index.tpl');
 ?>
