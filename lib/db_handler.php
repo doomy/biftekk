@@ -8,8 +8,9 @@ class dbHandler {
     }
 
     public function query_get_assoc_onerow(
-        $columns, $table, $order_by = '', $desc = false
+        $columns_list, $table, $order_by = '', $desc = false
     ) {
+        $columns = implode(', ', $columns_list);
         if ($order_by <> '')
             $order_by = "ORDER BY $order_by";
         if ($desc)
@@ -19,7 +20,6 @@ class dbHandler {
         $sql = "SELECT $columns FROM $table $order_by $desc LIMIT 1;";
         $result = mysql_query($sql, $this->connection);
         return mysql_fetch_assoc($result);
-        echo mysql_error;
     }
 }
 ?>
