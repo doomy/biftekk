@@ -2,9 +2,10 @@
 class dbHandler {
     private $connection;
 
-    public function __construct($db_host, $db_user, $db_pass, $db_name) {
-        $this->connection = mysql_connect($db_host, $db_user, $db_pass);
-        mysql_select_db($db_name, $this->connection);
+    public function __construct($env_file) {
+        include ($env_file);
+        $this->connection = mysql_connect($DB_HOST, $DB_USER, $DB_PASS);
+        mysql_select_db($DB_NAME, $this->connection);
     }
 
     public function query_get_assoc_onerow(

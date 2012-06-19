@@ -1,8 +1,7 @@
 <?php
-    include('env_spec/db.php');
     include('lib/db_handler.php');
 
-    $dbh = new dbHandler($DB_HOST, $DB_USER, $DB_PASS, $DB_NAME);
+    $dbh = new dbHandler('env_spec/db.php');
     $action = $_REQUEST['action'];
     switch ($action) {
         case 'actual':
