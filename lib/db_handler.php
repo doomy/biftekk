@@ -1,9 +1,10 @@
 <?php
 class dbHandler {
+    private $connection;
+
     public function __construct($db_host, $db_user, $db_pass, $db_name) {
-        $connection = mysql_connect($db_host, $db_user, $db_pass);
-        mysql_select_db($db_name, $connection);
-        return $connection;
+        $this->connection = mysql_connect($db_host, $db_user, $db_pass);
+        mysql_select_db($db_name, $this->connection);
     }
 
     public function query_get_assoc_onerow(
@@ -20,8 +21,9 @@ class dbHandler {
         else
             $limit = '';
         $sql = "SELECT $columns FROM $table $order_by $desc LIMIT 1;";
-        $result = mysql_query($sql);
+        $result = mysql_query($sql, $this->connection);
         return mysql_fetch_assoc($result);
+        echo mysql_error;
     }
 }
 ?>
