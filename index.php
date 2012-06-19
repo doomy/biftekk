@@ -1,7 +1,10 @@
 <?php
+    include('lib/env.php');
     include('lib/db_handler.php');
 
-    $dbh = new dbHandler('env_spec/db.php');
+    $env = new Env('env_spec/db.php');
+    $dbh = new dbHandler($env);
+
     $action = $_REQUEST['action'];
     switch ($action) {
         case 'actual':
