@@ -6,7 +6,6 @@
     $action = $_REQUEST['action'];
     switch ($action) {
         case 'actual':
-            $content_module   = 'actual';
             $content_template = 'actual';
         break;
         case 'archiv':
