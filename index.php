@@ -11,7 +11,7 @@
             $module = $content_template = 'actual';
         break;
         case 'archiv':
-            $content_template = 'archiv';
+            $module = $content_template = 'archiv';
         break;
         default:
             $content_template = 'intro';

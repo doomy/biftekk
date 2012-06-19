@@ -22,7 +22,7 @@ class dbHandler {
         return mysql_fetch_assoc($result);
     }
 
-    private function query($sql) {
+    public function query($sql) {
         return mysql_query($sql, $this->connection);
     }
 
