@@ -1,10 +1,20 @@
 body {
       background-color: black;
       color: white;
-      width: 960px;
-      margin: 0 auto;
+      width: 100%;
      }
 
 a {
     color: white;
   }
+
+body img {
+            display: block;
+            margin: 0 auto;
+           }
+
+.archiv img {
+            width: 470px;
+
+            }
+
