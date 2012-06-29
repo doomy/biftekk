@@ -1,7 +1,7 @@
 <?php
-    $DB_HOST = 'localhost';
-    $DB_USER = 'root';
-    $DB_PASS = '';
-    $DB_NAME = 'biftekk';
-    $DB_CREATE = true;
+    $ENV_VARS['DB_HOST'] = 'localhost';
+    $ENV_VARS['DB_USER'] = 'root';
+    $ENV_VARS['DB_PASS'] = '';
+    $ENV_VARS['DB_NAME'] = 'biftekk';
+    $ENV_VARS['DB_CREATE'] = true;
 ?>
