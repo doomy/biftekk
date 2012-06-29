@@ -5,7 +5,9 @@
     $env = new Env('env_spec/db.php');
     $dbh = new dbHandler($env);
 
-    $action = $_REQUEST['action'];
+    if (@!$action = $_REQUEST['action']) {
+        $action = 'intro';
+    };
     switch ($action) {
         case 'actual':
             $module = $content_template = 'actual';

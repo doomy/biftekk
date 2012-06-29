@@ -3,8 +3,8 @@ class dbHandler {
     private $connection;
 
     public function __construct($env) {
-        $this->connection = mysql_connect($env->DB_HOST, $env->DB_USER, $env->DB_PASS);
-        mysql_select_db($env->DB_NAME, $this->connection);
+        $this->connection = mysql_connect($env->ENV_VARS['DB_HOST'], $env->ENV_VARS['DB_USER'], $env->ENV_VARS['DB_PASS']);
+        mysql_select_db($env->ENV_VARS['DB_NAME'], $this->connection);
     }
 
     public function query_get_assoc_onerow(
