@@ -3,4 +3,5 @@
     $DB_USER = 'root';
     $DB_PASS = '';
     $DB_NAME = 'biftekk';
+    $DB_CREATE = true;
 ?>

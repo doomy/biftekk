@@ -5,6 +5,10 @@ class dbHandler {
     public function __construct($env) {
         $this->connection = mysql_connect($env->ENV_VARS['DB_HOST'], $env->ENV_VARS['DB_USER'], $env->ENV_VARS['DB_PASS']);
         mysql_select_db($env->ENV_VARS['DB_NAME'], $this->connection);
+        if ($env->ENV_VARS['DB_CREATE']) {
+            $sql = 'CREATE TABLE IF NOT EXISTS upgrade_history (id INT, message TEXT);';
+            $this->query($sql);
+        }
     }
 
     public function query_get_assoc_onerow(
@@ -25,6 +29,8 @@ class dbHandler {
     public function query($sql) {
         return mysql_query($sql, $this->connection);
     }
-
+    
+    function reset_db() {
+    }
 }
 ?>
