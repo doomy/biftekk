@@ -30,7 +30,7 @@ class dbHandler {
     }
     
     function _create_db() {
-        $sql = 'CREATE TABLE IF NOT EXISTS upgrade_history (id INT, message TEXT);';
+        $sql = file_get_contents('sql/base.sql');
         $this->query($sql);
     }
 }
