@@ -1,0 +1,14 @@
+form {
+    width: 250px;
+    margin: 0 auto;
+}
+
+fieldset {
+    padding: 25px;
+    background-color: #dddfdd;
+}
+
+input {
+    display: block;
+    margin: 0 auto;
+}
