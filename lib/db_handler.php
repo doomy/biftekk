@@ -6,8 +6,7 @@ class dbHandler {
         $this->connection = mysql_connect($env->ENV_VARS['DB_HOST'], $env->ENV_VARS['DB_USER'], $env->ENV_VARS['DB_PASS']);
         mysql_select_db($env->ENV_VARS['DB_NAME'], $this->connection);
         if ($env->ENV_VARS['DB_CREATE']) {
-            $sql = 'CREATE TABLE IF NOT EXISTS upgrade_history (id INT, message TEXT);';
-            $this->query($sql);
+            $this->_create_db();
         }
     }
 
@@ -30,7 +29,9 @@ class dbHandler {
         return mysql_query($sql, $this->connection);
     }
     
-    function reset_db() {
+    function _create_db() {
+        $sql = 'CREATE TABLE IF NOT EXISTS upgrade_history (id INT, message TEXT);';
+        $this->query($sql);
     }
 }
 ?>
