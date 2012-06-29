@@ -31,7 +31,14 @@ class dbHandler {
     
     function _create_db() {
         $sql = file_get_contents('sql/base.sql');
-        $this->query($sql);
+        $this->_process_sql($sql);
+    }
+    
+    function _process_sql($sql) {
+        $queries = explode(';', $sql);
+        foreach ($queries as $query) {
+            $this->query($query);
+        }
     }
 }
 ?>
