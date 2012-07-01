@@ -2,7 +2,7 @@
     include('lib/env.php');
     include('lib/db_handler.php');
 
-    $env = new Env('env_spec');
+    $env = new Env('');
     $dbh = new dbHandler($env);
 
     if (@!$action = $_REQUEST['action']) {

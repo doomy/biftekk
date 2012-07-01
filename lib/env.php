@@ -1,12 +1,12 @@
 <?php
 class Env {
-    # version 1
+    # version 2
 
-    public function __construct($env_dir) {
-        require('lib/dir.php');
+    public function __construct($basedir) {
+        require($basedir.'lib/dir.php');
 
         $dir_handler = new Dir();
-        $files = $dir_handler->get_files_from_dir_by_extension($env_dir, 'php');
+        $files = $dir_handler->get_files_from_dir_by_extension($basedir.'env_spec', 'php');
         foreach ($files as $file) {
             include('env_spec/'.$file);
         }
