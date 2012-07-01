@@ -9,8 +9,8 @@
         <form id="login">
             <h1>Přihlášení</h1>
             <fieldset id="inputs">
-                <input id="username" type="text" placeholder="Uživ. jméno" autofocus required>
-                <input id="password" type="password" placeholder="Heslo" required>
+                <input id="username" name="username" type="text" placeholder="Uživ. jméno" autofocus required>
+                <input id="password" name="password" type="password" placeholder="Heslo" required>
             </fieldset>
             <fieldset id="actions">
                 <input type="submit" id="submit" value="Přihlásit">
