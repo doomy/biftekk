@@ -8,14 +8,14 @@ class Admin {
     }
 
     public function run() {
-        if (!isset ( $_SESSION['username'] )) {
-            if(isset ($_POST['username']) ) {
-                if ($this->_check_login(
-                    $_POST['username'], $_POST['password']
-                )) {
-                    $this->_logged_in();
-                    return true;
-                }
+        if (isset($_SESSION['username'])) {
+            $this->_logged_in();
+            return true;
+        }
+        if(isset ($_POST['username']) ) {
+            if ($this->_check_login($_POST['username'], $_POST['password'])) {
+                $this->_logged_in();
+                return true;
             }
         }
         $this->_show_login_form();
