@@ -1,6 +1,6 @@
 <?php
 class Admin {
-    # version 3
+    # version 4
     # requires Env, Login
     
     public function __construct($env) {
@@ -21,13 +21,16 @@ class Admin {
             }
         }
         if(isset ($_POST['username']) ) {
-            $given_credentials->username = $_POST['username'];
-            $given_credentials->password = $_POST['password'];
-            $expected_credentials->username =
-                $this->env->ENV_VARS['admin_username'];
-            $expected_credentials->password =
-                $this->env->ENV_VARS['admin_password'];
-        
+            require ($this->env->basedir.'lib/login/credentials.php');
+            
+            $given_credentials = new Credentials(
+                $_POST['username'], $_POST['password']
+            );
+            $expected_credentials = new Credentials(
+                $this->env->ENV_VARS['admin_username'],
+                $this->env->ENV_VARS['admin_password']
+            );
+
             if ($login->attempt_login($given_credentials, $expected_credentials)) {
                 $this->_logged_in();
                 return;
