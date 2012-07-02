@@ -1,6 +1,7 @@
 <?php
 class Admin {
-    # version 1
+    # version 2
+    # requires Env, Login
     
     public function __construct($env) {
         session_start();
@@ -8,7 +9,9 @@ class Admin {
     }
 
     public function run() {
-        if (isset($_SESSION['logged_in'])) {
+        require ($this->env->basedir.'lib/login.php');
+        $login = new Login();
+        if ($login->is_logged_in()) {
             if (@$_GET['action']=='logout') {
                 $this->_log_out();
             }
