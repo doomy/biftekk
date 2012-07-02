@@ -9,8 +9,13 @@ class Admin {
 
     public function run() {
         if (isset($_SESSION['logged_in'])) {
-            $this->_logged_in();
-            return true;
+            if (@$_GET['action']=='logout') {
+                $this->_log_out();
+            }
+            else {
+                $this->_logged_in();
+                return true;
+            }
         }
         if(isset ($_POST['username']) ) {
             if ($this->_check_login($_POST['username'], $_POST['password'])) {
@@ -33,13 +38,18 @@ class Admin {
     }
     
     function _logged_in() {
-        echo 'You are logged in.';
+        echo 'You are logged in.<br/>';
+        echo "<a href='?action=logout' />Log out</a>";
+    }
+    
+    function _log_out() {
+        unset($_SESSION['logged_in']);
     }
     
     function _log_in() {
         $_SESSION['logged_in'] = true;
         echo 'Logging you in...';
-        $this->logged_in();
+        $this->_logged_in();
     }
 }
 ?>
