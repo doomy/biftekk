@@ -1,6 +1,6 @@
 <?php
 class Admin {
-    # version 4
+    # version 5
     # requires Env, Login
     
     public function __construct($env) {
@@ -10,31 +10,19 @@ class Admin {
 
     public function run() {
         require ($this->env->basedir.'lib/login.php');
-        $login = new Login();
-        if ($login->is_logged_in()) {
+        $this->login = new Login();
+        if ($this->login->is_logged_in()) {
             if (@$_GET['action']=='logout') {
-                $login->log_out();
+                $this->login->log_out();
             }
             else {
                 $this->_logged_in();
-                return true;
-            }
-        }
-        if(isset ($_POST['username']) ) {
-            require ($this->env->basedir.'lib/login/credentials.php');
-            
-            $given_credentials = new Credentials(
-                $_POST['username'], $_POST['password']
-            );
-            $expected_credentials = new Credentials(
-                $this->env->ENV_VARS['admin_username'],
-                $this->env->ENV_VARS['admin_password']
-            );
-
-            if ($login->attempt_login($given_credentials, $expected_credentials)) {
-                $this->_logged_in();
                 return;
             }
+        }
+        if(isset($_POST['username']) && $this->_attempt_login()) {
+            $this->_logged_in();
+            return;
         }
         $this->_show_login_form();
     }
@@ -46,6 +34,25 @@ class Admin {
     function _logged_in() {
         echo 'You are logged in.<br/>';
         echo "<a href='?action=logout' />Log out</a>";
+    }
+    
+    function _attempt_login() {
+        require ($this->env->basedir.'lib/login/credentials.php');
+        $given_credentials = new Credentials(
+            $_POST['username'], $_POST['password']
+        );
+        $expected_credentials = new Credentials(
+            $this->env->ENV_VARS['admin_username'],
+            $this->env->ENV_VARS['admin_password']
+        );
+
+        if ($this->login->attempt_login(
+            $given_credentials, $expected_credentials
+        ))
+        {
+            return true;
+        }
+        return false;
     }
 }
 ?>
