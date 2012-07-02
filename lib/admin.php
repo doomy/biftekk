@@ -8,16 +8,19 @@ class Admin {
     }
 
     public function run() {
-        if (!$this->_check_login(@$_POST['username'], @$_POST['password'])) {
-            $this->_show_login_form();
+     if (!isset ( $_SESSION['username'] ) {
+            if (!$this->_check_login(@$_POST['username'], @$_POST['password']))
+            {
+                $this->_show_login_form();
+            }
         }
     }
     
     function _check_login($username, $password) {
-        return ( isset ( $_SESSION['username'] )  || (
+        return (
             $username == $this->env->ENV_VARS['admin_username']
             && $password == $this->env->ENV_VARS['admin_password']
-        ));
+        );
     }
     
     function _show_login_form() {
