@@ -13,6 +13,7 @@ class Admin {
                 if ($this->_check_login(
                     $_POST['username'], $_POST['password']
                 )) {
+                    $this->_logged_in();
                     return true;
                 }
             }
@@ -29,6 +30,10 @@ class Admin {
     
     function _show_login_form() {
         include($this->env->basedir.'templates/admin/login.tpl');
+    }
+    
+    function _logged_in() {
+        echo 'You are logged in.';
     }
 }
 ?>
