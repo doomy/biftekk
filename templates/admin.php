@@ -7,6 +7,7 @@
     </head>
     <body>
         You are logged in.
+        <?php echo $template_output ?>
         <br />
         <a href='?action=logout' />Log out</a>
     </body>

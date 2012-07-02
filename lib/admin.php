@@ -1,6 +1,6 @@
 <?php
 class Admin {
-    # version 5
+    # version 7
     # requires Env, Login
     
     public function __construct($env) {
@@ -22,12 +22,19 @@ class Admin {
         }
         $this->_show_login_form();
     }
+    
+    public function add_modules($module) {
+        $this->modules[] = $module;
+    }
 
     function _show_login_form() {
         include($this->env->basedir.'templates/admin/login.php');
     }
     
     function _logged_in() {
+        foreach($this->modules as $module) {
+            $template_output = $module->run();
+        }
         include($this->env->basedir.'templates/admin.php');
     }
     
