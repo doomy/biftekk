@@ -8,7 +8,7 @@ class Admin {
     }
 
     public function run() {
-        if (!$this->_check_login(@$_REQUEST['username'], @$_REQUEST['password'])) {
+        if (!$this->_check_login(@$_POST['username'], @$_POST['password'])) {
             $this->_show_login_form();
         }
     }

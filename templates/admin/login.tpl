@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <form id="login">
+        <form id="login" method="POST">
             <h1>Přihlášení</h1>
             <fieldset id="inputs">
                 <input id="username" name="username" type="text" placeholder="Uživ. jméno" autofocus required>
