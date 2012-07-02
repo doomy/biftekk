@@ -24,7 +24,7 @@ class Admin {
     }
 
     function _show_login_form() {
-        include($this->env->basedir.'templates/admin/login.tpl');
+        include($this->env->basedir.'templates/admin/login.php');
     }
     
     function _logged_in() {

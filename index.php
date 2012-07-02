@@ -21,5 +21,5 @@
     }
 
     if (isset($module)) include ("inc/$module.php");
-    include ('templates/index.tpl');
+    include ('templates/index.php');
 ?>

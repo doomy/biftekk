@@ -10,6 +10,6 @@
     </head>
     <body>
 
-        <?php include("$content_template.tpl"); ?>
+        <?php include("$content_template.php"); ?>
     </body>
 </html>
