@@ -15,14 +15,10 @@ class Admin {
             if (@$_GET['action']=='logout') {
                 $this->login->log_out();
             }
-            else {
-                $this->_logged_in();
-                return;
-            }
+            else return $this->_logged_in();
         }
         if(isset($_POST['username']) && $this->_attempt_login()) {
-            $this->_logged_in();
-            return;
+            return $this->_logged_in();
         }
         $this->_show_login_form();
     }
