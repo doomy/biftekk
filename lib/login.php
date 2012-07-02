@@ -27,7 +27,6 @@ class Login {
     
     function _log_in() {
         $_SESSION['logged_in'] = true;
-        echo 'Logging you in...';
     }
 }
 ?>

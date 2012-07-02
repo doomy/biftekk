@@ -28,8 +28,7 @@ class Admin {
     }
     
     function _logged_in() {
-        echo 'You are logged in.<br/>';
-        echo "<a href='?action=logout' />Log out</a>";
+        include($this->env->basedir.'templates/admin.php');
     }
     
     function _attempt_login() {
