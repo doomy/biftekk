@@ -13,7 +13,7 @@ class Admin {
         $login = new Login();
         if ($login->is_logged_in()) {
             if (@$_GET['action']=='logout') {
-                $this->_log_out();
+                $login->log_out();
             }
             else {
                 $this->_logged_in();
@@ -44,11 +44,7 @@ class Admin {
         echo 'You are logged in.<br/>';
         echo "<a href='?action=logout' />Log out</a>";
     }
-    
-    function _log_out() {
-        unset($_SESSION['logged_in']);
-    }
-    
+
     function _log_in() {
         $_SESSION['logged_in'] = true;
         echo 'Logging you in...';
