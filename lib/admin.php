@@ -8,13 +8,13 @@ class Admin {
     }
 
     public function run() {
-        if (isset($_SESSION['username'])) {
+        if (isset($_SESSION['logged_in'])) {
             $this->_logged_in();
             return true;
         }
         if(isset ($_POST['username']) ) {
             if ($this->_check_login($_POST['username'], $_POST['password'])) {
-                $this->_logged_in();
+                $this->_log_in();
                 return true;
             }
         }
@@ -34,6 +34,12 @@ class Admin {
     
     function _logged_in() {
         echo 'You are logged in.';
+    }
+    
+    function _log_in() {
+        $_SESSION['logged_in'] = true;
+        echo 'Logging you in...';
+        $this->logged_in();
     }
 }
 ?>
