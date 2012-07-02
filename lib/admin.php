@@ -1,6 +1,6 @@
 <?php
 class Admin {
-    # version 2
+    # version 3
     # requires Env, Login
     
     public function __construct($env) {
@@ -21,21 +21,21 @@ class Admin {
             }
         }
         if(isset ($_POST['username']) ) {
-            if ($this->_check_login($_POST['username'], $_POST['password'])) {
-                $this->_log_in();
-                return true;
+            $given_credentials->username = $_POST['username'];
+            $given_credentials->password = $_POST['password'];
+            $expected_credentials->username =
+                $this->env->ENV_VARS['admin_username'];
+            $expected_credentials->password =
+                $this->env->ENV_VARS['admin_password'];
+        
+            if ($login->attempt_login($given_credentials, $expected_credentials)) {
+                $this->_logged_in();
+                return;
             }
         }
         $this->_show_login_form();
     }
-    
-    function _check_login($username, $password) {
-        return (
-            $username == $this->env->ENV_VARS['admin_username']
-            && $password == $this->env->ENV_VARS['admin_password']
-        );
-    }
-    
+
     function _show_login_form() {
         include($this->env->basedir.'templates/admin/login.tpl');
     }
@@ -43,12 +43,6 @@ class Admin {
     function _logged_in() {
         echo 'You are logged in.<br/>';
         echo "<a href='?action=logout' />Log out</a>";
-    }
-
-    function _log_in() {
-        $_SESSION['logged_in'] = true;
-        echo 'Logging you in...';
-        $this->_logged_in();
     }
 }
 ?>
