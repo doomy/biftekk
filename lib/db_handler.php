@@ -1,5 +1,7 @@
 <?php
 class dbHandler {
+    # version 2
+
     private $connection;
 
     public function __construct($env) {
@@ -31,6 +33,15 @@ class dbHandler {
 
     public function query($sql) {
         return mysql_query($sql, $this->connection);
+    }
+    
+    public function get_array_of_rows_from_table($table_name) {
+        $sql = "SELECT * FROM $table_name";
+        $result = $this->query($sql);
+        while ($row = mysql_fetch_assoc($result)) {
+            $rows[] = $row;
+        }
+        return $rows;
     }
     
     function _create_db() {
