@@ -6,8 +6,7 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        You are logged in.
-        <?php echo $template_output ?>
+        <?php include ($this->env->basedir . 'templates/admin/plugins/'.$content_template); ?>
         <br />
         <a href='?action=logout' />Log out</a>
     </body>

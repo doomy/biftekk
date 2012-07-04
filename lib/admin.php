@@ -33,7 +33,7 @@ class Admin {
     
     function _logged_in() {
         foreach($this->modules as $module) {
-            $template_output = $module->run();
+            $content_template = $module->content_template;
         }
         include($this->env->basedir.'templates/admin.php');
     }
