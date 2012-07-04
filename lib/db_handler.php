@@ -5,13 +5,14 @@ class dbHandler {
     private $connection;
 
     public function __construct($env) {
+        $this->env = $env;
         $this->connection = mysql_connect(
-            $env->ENV_VARS['DB_HOST'],
-            $env->ENV_VARS['DB_USER'],
-            $env->ENV_VARS['DB_PASS']
+            $this->env->ENV_VARS['DB_HOST'],
+            $this->env->ENV_VARS['DB_USER'],
+            $this->env->ENV_VARS['DB_PASS']
         );
         mysql_select_db($env->ENV_VARS['DB_NAME'], $this->connection);
-        if ($env->ENV_VARS['DB_CREATE']) {
+        if ($this->env->ENV_VARS['DB_CREATE']) {
             $this->_create_db();
         }
     }
@@ -45,7 +46,7 @@ class dbHandler {
     }
     
     function _create_db() {
-        $sql = file_get_contents('sql/base.sql');
+        $sql = file_get_contents($this->env->basedir.'sql/base.sql');
         $this->_process_sql($sql);
     }
     
