@@ -6,6 +6,6 @@
     $env   = new Env('../');
     $dbh = new dbHandler($env);
     $admin = new Admin($env);
-    $admin->add_modules(new TableEdit($dbh, 'events'));
+    $admin->add_modules(new TableEdit($dbh, 'events', array('filename')));
     $admin->run();
 ?>
