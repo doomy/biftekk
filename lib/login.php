@@ -1,6 +1,7 @@
 <?php
 class Login {
-    # version 2
+    # requires session_start
+    # version 3
     
     public function is_logged_in() {
         return isset($_SESSION['logged_in']);
