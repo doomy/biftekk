@@ -13,8 +13,16 @@ You are logged in.
                 echo "<tr>";
                     foreach ($row as $column => $record) {
                         if ($column == 'id') $id = $record;
-                        if (in_array($column, $admin->template_vars['editable_columns'])) {
-                            echo "<td><input type='text' name='column_{$column}_id_$id' value='$record' /></td>";
+                        $editable = false;
+                        $editable_type = '';
+                        foreach ($admin->template_vars['editable_columns'] as $editable_column) {
+                            if ($editable_column->name == $column) {
+                                $editable = true;
+                                $editable_type = $editable_column->type;
+                            }
+                        }
+                        if ($editable) {
+                            echo "<td><input type='$editable_type' name='column_{$column}_id_$id' value='$record' /></td>";
                         }
                         else
                             echo "<td>$record</td>";
