@@ -33,14 +33,18 @@ class TableEdit {
         foreach($_POST as $post_key => $post_value) {
             $sql = "";
             if (strpos($post_key, 'column_') > -1) {
-                $parts = explode('_', $post_key);
-                $column = $parts[1];
-                $id = array_pop($parts);
-                $sql .= "UPDATE $this->table_name
-                            SET $column='$post_value' WHERE id=$id";
+                $sql .= $this->_get_update_sql_from_post($post_key, $post_value);
             }
             $this->dbh->query($sql);
         }
+    }
+    
+    function _get_update_sql_from_post($post_key, $post_value) {
+        $parts = explode('_', $post_key);
+        $column = $parts[1];
+        $id = array_pop($parts);
+        return "UPDATE $this->table_name
+            SET $column='$post_value' WHERE id=$id";
     }
 }
 ?>
