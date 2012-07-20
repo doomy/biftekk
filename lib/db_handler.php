@@ -1,6 +1,6 @@
 <?php
 class dbHandler {
-    # version 3
+    # version 4
 
     private $connection;
 
@@ -46,8 +46,7 @@ class dbHandler {
     }
     
     function _create_db() {
-        $sql = file_get_contents($this->env->basedir.'sql/base.sql');
-        $this->process_sql($sql);
+        $this->process_sql_file($this->env->basedir.'sql/base.sql');
     }
     
     public function process_sql($sql) {
@@ -55,6 +54,11 @@ class dbHandler {
         foreach ($queries as $query) {
             $this->query($query);
         }
+    }
+    
+    public function process_sql_file($path) {
+        $sql = file_get_contents($path);
+        $this->process_sql($sql);
     }
 }
 ?>
