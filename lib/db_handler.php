@@ -52,7 +52,7 @@ class dbHandler {
     public function process_sql($sql) {
         $queries = explode(';', $sql);
         foreach ($queries as $query) {
-            $this->query($query);
+            $this->query($query.';');
         }
     }
     
