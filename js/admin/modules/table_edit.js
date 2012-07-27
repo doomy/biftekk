@@ -3,8 +3,9 @@
 $(function() {
     $('.fileinput').click(function() {
         $(this).after(
-            $("<input class='hidden' type='file' name='file_to_upload' id='file_to_upload' />")
-        );
+            $("<input type='file' name='file_to_upload' id='file_to_upload' />")
+        ).hide();
+
         $('#file_to_upload').click();
     });
 });
