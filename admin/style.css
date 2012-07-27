@@ -26,3 +26,7 @@ table tr {
 table tr th {
     background-color: #bfbfbf;
 }
+
+.fileinput {
+    width: 210px;
+}
