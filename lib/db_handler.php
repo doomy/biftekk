@@ -33,7 +33,6 @@ class dbHandler {
     }
 
     public function query($sql) {
-        echo $sql;
         return mysql_query($sql, $this->connection);
     }
     
