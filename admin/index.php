@@ -11,7 +11,7 @@
     $filename_column = new EditableColumn('filename','file');
     $date_column     = new EditableColumn('date', 'text');
     $table_edit = new TableEdit(
-        $dbh, 'events', array($filename_column, $date_column
+        $admin, $dbh, 'events', array($filename_column, $date_column
     ));
     $admin->add_modules($table_edit);
     $admin->run();

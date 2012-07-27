@@ -34,13 +34,12 @@ class Admin {
     function _logged_in() {
         $this->template_vars = array();
         foreach($this->modules as $module) {
-            #var_dump( $module->template_vars);
             $content_template = $module->content_template;
             $this->template_vars = array_merge(
                 $this->template_vars, $module->template_vars
             );
         }
-        include($this->env->basedir.'templates/admin.php');
+        require($this->env->basedir.'templates/admin.php');
     }
     
     function _attempt_login() {

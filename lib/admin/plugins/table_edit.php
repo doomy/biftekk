@@ -1,7 +1,8 @@
 <?php
 class TableEdit {
-# version 3
-    public function __construct($dbh, $table, $editable_columns) {
+# version 4
+    public function __construct($admin, $dbh, $table, $editable_columns) {
+        $this->admin = $admin;
         $this->dbh = $dbh;
         $this->title = 'TableEdit';
         $this->content_template = 'table_edit.php';
@@ -30,15 +31,30 @@ class TableEdit {
     }
     
     function _update() {
+        $this->_update_files();
+        $this->_update_from_post();
+    }
+    
+    function _update_files() {
+        foreach ($_FILES as $file) {
+            move_uploaded_file(
+                $file['tmp_name'],
+                $this->admin->env->basedir . "img/events/" . $file["name"]
+            );
+        }
+    }
+    
+    function _update_from_post() {
         foreach($_POST as $post_key => $post_value) {
             $sql = "";
+
             if (strpos($post_key, 'column_') > -1) {
                 $sql .= $this->_get_update_sql_from_post($post_key, $post_value);
             }
             $this->dbh->query($sql);
         }
     }
-    
+
     function _get_update_sql_from_post($post_key, $post_value) {
         $parts = explode('_', $post_key);
         $column = $parts[1];

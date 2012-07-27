@@ -1,5 +1,6 @@
+<?php // version 1 ?>
 You are logged in.
-<form action='' method='POST'>
+<form action='' enctype="multipart/form-data" id='table_form' method='POST'>
     <table>
         <tr>
             <?php
@@ -16,7 +17,7 @@ You are logged in.
                         $editable_type = get_editable_type($admin->template_vars, $column);
                         if ($editable_type) {
                             if ($editable_type=='file') {
-                                echo "<td><input type='text' value='$record' /></td>";
+                                echo "<td><input type='text' value='$record' class='fileinput' id='file' /></td>";
                             }
                             else
                             {

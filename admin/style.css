@@ -26,3 +26,7 @@ table tr {
 table tr th {
     background-color: #bfbfbf;
 }
+
+.hidden {
+    display: none;
+}
