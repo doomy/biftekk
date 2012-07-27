@@ -1,6 +1,6 @@
 <?php
 class dbHandler {
-    # version 4
+    # version 5
 
     private $connection;
 
@@ -33,7 +33,6 @@ class dbHandler {
     }
 
     public function query($sql) {
-        echo $sql;
         return mysql_query($sql, $this->connection);
     }
     
