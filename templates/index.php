@@ -1,4 +1,5 @@
 <!doctype html>
+<?php // version 1 ?>
 <html lang="cs">
     <head>
         <meta charset="utf-8" />
@@ -7,7 +8,7 @@
         <title>Biftekk sound system</title>
         <?php
             include ($env->basedir . 'lib/template/included_file.php');
-            $css = new IncludedFile ('style.css', 'css', $dbh);
+            $css = new IncludedFile ('style.css', $dbh, 'css');
         ?>
         <link rel="stylesheet" href="css/style.css" type="text/css">
     </head>

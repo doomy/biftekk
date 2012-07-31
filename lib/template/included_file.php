@@ -1,8 +1,8 @@
 <?php
 class IncludedFile {
-    // version 1
+    // version 2
 
-    public function __construct($file, $type, $env) {
+    public function __construct($file, $env, $type) {
         $this->file = $file;
         $this->type = $type;
         $this->env = $env;
