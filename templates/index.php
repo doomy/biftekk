@@ -4,12 +4,14 @@
         <meta charset="utf-8" />
         <meta name="description" content="The HTML5 Herald" />
         <meta name="author" content="SitePoint" />
-        <link rel="stylesheet" href="css/styles.css?v=1.0" />
         <title>Biftekk sound system</title>
+        <?php
+            include ($env->basedir . 'lib/template/included_file.php');
+            $css = new IncludedFile ('style.css', 'css', $dbh);
+        ?>
         <link rel="stylesheet" href="css/style.css" type="text/css">
     </head>
     <body>
-
-        <?php include("$content_template.php"); ?>
+        <?php include($env->basedir."$content_template.php"); ?>
     </body>
 </html>
