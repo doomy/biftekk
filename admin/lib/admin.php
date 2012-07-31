@@ -1,6 +1,6 @@
 <?php
 class Admin {
-    # version 8
+    # version 9
     # requires Env, Login
     
     public function __construct($env) {
@@ -9,7 +9,7 @@ class Admin {
     }
 
     public function run() {
-        require ($this->env->basedir.'lib/login.php');
+        require ($this->env->basedir.'admin/lib/login.php');
         $this->login = new Login();
         if ($this->login->is_logged_in()) {
             if (@$_GET['action']=='logout') {
@@ -28,7 +28,7 @@ class Admin {
     }
 
     function _show_login_form() {
-        include($this->env->basedir.'templates/admin/login.php');
+        include($this->env->basedir.'admin/templates/login.php');
     }
     
     function _logged_in() {
@@ -39,11 +39,11 @@ class Admin {
                 $this->template_vars, $module->template_vars
             );
         }
-        require($this->env->basedir.'templates/admin.php');
+        require($this->env->basedir.'/admin/templates/admin.php');
     }
     
     function _attempt_login() {
-        require ($this->env->basedir.'lib/login/credentials.php');
+        require ($this->env->basedir.'admin/lib/login/credentials.php');
         $given_credentials = new Credentials(
             $_POST['username'], $_POST['password']
         );

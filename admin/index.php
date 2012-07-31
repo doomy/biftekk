@@ -1,9 +1,11 @@
 <?php
+// version 2
+
     require ('../lib/env.php');
     require ('../lib/db_handler.php');
-    require ('../lib/admin.php');
-    require ('../lib/admin/plugins/table_edit.php');
-    require ('../lib/admin/plugins/table_edit/editable_column.php');
+    require ('lib/admin.php');
+    require ('lib/admin/plugins/table_edit.php');
+    require ('lib/admin/plugins/table_edit/editable_column.php');
     $env   = new Env('../');
     $dbh = new dbHandler($env);
     $admin = new Admin($env);
