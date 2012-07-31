@@ -14,10 +14,10 @@ class IncludedFile {
         }
         switch ($this->type) {
             case 'javascript':
-                echo "<script src='$this->file' type='text/javascript'></script>";
+                echo "<script src='$this->file' type='text/javascript'></script> \n";
             break;
             case 'css':
-                echo "<link rel='stylesheet' href='$this->file'>";
+                echo "<link rel='stylesheet' href='$this->file' /> \n";
             break;
         }
     }
