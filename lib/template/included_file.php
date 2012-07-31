@@ -1,10 +1,10 @@
 <?php
 class IncludedFile {
-    // version 2
+    // version 3
 
-    public function __construct($file, $env, $type) {
+    public function __construct($file, $env, $type=null) {
         $this->file = $file;
-        $this->type = $type;
+        $this->type = $this->_get_type($type);
         $this->env = $env;
     }
 
@@ -30,6 +30,34 @@ class IncludedFile {
         if ($this->type == 'javascript') {
             $this->file = $this->env->basedir . 'js/' . $this->file;
         }
+    }
+    
+    function _get_type($type) {
+
+        if(is_null($type)) {
+            return $this->_assume_type();
+        }
+        else return $type;
+    }
+    
+    function _assume_type() {
+        $extension = $this->_get_extension($this->file);
+        switch (strtolower($extension)) {
+            case 'css':
+                return 'css';
+            break;
+            case 'js':
+                return 'javascript';
+            break;
+            default:
+                die ('Cannot determine file type!');
+            break;
+        }
+    }
+    
+    function _get_extension($filename) {
+        $parts = explode('.', $filename);
+        return array_pop($parts);
     }
 }
 
