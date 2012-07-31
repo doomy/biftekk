@@ -1,6 +1,8 @@
 <?php
 class IncludedFile {
-    // version 3
+    // version 4
+
+    private $DEFAULT_JS_PATH = 'js/';
 
     public function __construct($file, $env, $type=null) {
         $this->file = $file;
@@ -22,17 +24,17 @@ class IncludedFile {
         }
     }
     
-    function _contains_path() {
+    private function _contains_path() {
         return (strpos($this->file, '/') > -1);
     }
     
-    function _assume_path(){
+    private function _assume_path(){
         if ($this->type == 'javascript') {
-            $this->file = $this->env->basedir . 'js/' . $this->file;
+            $this->file = $this->env->basedir . $this->DEFAULT_JS_PATH . $this->file;
         }
     }
     
-    function _get_type($type) {
+    private function _get_type($type) {
 
         if(is_null($type)) {
             return $this->_assume_type();
@@ -40,7 +42,7 @@ class IncludedFile {
         else return $type;
     }
     
-    function _assume_type() {
+    private function _assume_type() {
         $extension = $this->_get_extension($this->file);
         switch (strtolower($extension)) {
             case 'css':
@@ -55,7 +57,7 @@ class IncludedFile {
         }
     }
     
-    function _get_extension($filename) {
+    private function _get_extension($filename) {
         $parts = explode('.', $filename);
         return array_pop($parts);
     }
