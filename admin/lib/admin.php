@@ -39,11 +39,11 @@ class Admin {
                 $this->template_vars, $module->template_vars
             );
         }
-        require($this->env->basedir.'/admin/templates/admin.php');
+        require($this->env->basedir .'/admin/templates/admin.php');
     }
     
     private function _attempt_login() {
-        require ($this->env->basedir.'admin/lib/login/credentials.php');
+        require ($this->env->basedir.'lib/login/credentials.php');
         $given_credentials = new Credentials(
             $_POST['username'], $_POST['password']
         );
