@@ -1,6 +1,6 @@
 <?php
 class TableEdit {
-# version 6
+# version 7
 
     public function __construct($admin, $dbh, $table, $editable_columns) {
         $this->admin = $admin;
@@ -40,10 +40,17 @@ class TableEdit {
         require ($this->admin->env->basedir . 'lib/file_uploader.php');
         $fileUploader = new FileUploader;
         foreach ($_FILES as $file) {
-            $fileUploader->upload(
-                $this->admin->env->basedir . "img/events/", $file
-            );
+            $this->_handle_file_upload($file, $fileUploader);
         }
+    }
+    
+    private function _handle_file_upload($file, $fileUploader) {
+        $uploaded_file_path = $fileUploader->upload(
+            $this->admin->env->basedir . "img/events/", $file
+        );
+        $uploaded_filename =
+            $this->_get_filename_from_path($uploaded_file_path);
+        $this->_handle_filename_change($file['name'], $uploaded_filename);
     }
     
     private function _update_from_post() {
@@ -63,6 +70,25 @@ class TableEdit {
         $id = array_pop($parts);
         return "UPDATE $this->table_name
             SET $column='$post_value' WHERE id=$id";
+    }
+    
+    private function _get_filename_from_path($path) {
+        $parts = explode("/", $path);
+        return array_pop($parts);
+    }
+    
+    private function _handle_filename_change($old_filename, $new_filename) {
+        if ($new_filename != $old_filename) {
+            $this->_correct_filename_in_POST($old_filename, $new_filename);
+        }
+    }
+    
+    private function _correct_filename_in_POST($old_filename, $new_filename) {
+        foreach ($_POST as $post_key => $post_value) {
+            if ($post_value == $old_filename) {
+                $_POST[$post_key] = $new_filename;
+            }
+        }
     }
 }
 ?>
