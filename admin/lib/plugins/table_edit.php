@@ -1,6 +1,7 @@
 <?php
 class TableEdit {
-# version 5
+# version 6
+
     public function __construct($admin, $dbh, $table, $editable_columns) {
         $this->admin = $admin;
         $this->dbh = $dbh;
@@ -36,10 +37,11 @@ class TableEdit {
     }
     
     private function _update_files() {
+        require ($this->admin->env->basedir . 'lib/file_uploader.php');
+        $fileUploader = new FileUploader;
         foreach ($_FILES as $file) {
-            move_uploaded_file(
-                $file['tmp_name'],
-                $this->admin->env->basedir . "img/events/" . $file["name"]
+            $fileUploader->upload(
+                $this->admin->env->basedir . "img/events/", $file
             );
         }
     }
