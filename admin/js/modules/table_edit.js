@@ -1,4 +1,4 @@
-// version 2
+// version 3
 
 $(function() {
     $('.fileinput').click(function() {
@@ -6,10 +6,15 @@ $(function() {
         var $fileinput = $(this);
         $(this).after($input);
         $input.change(function () {
-             $fileinput.val($(this).val() );
+             var filename = get_filename_from_path($(this).val());
+             $fileinput.val(filename);
         });
         $input.hide();
 
         $('#file_to_upload').click();
     });
 });
+
+function get_filename_from_path(text) {
+    return text.split('\\').pop().split('/').pop();
+}
