@@ -8,11 +8,20 @@
         <title>Biftekk sound system</title>
         <?php
             include ($env->basedir . 'lib/template/included_file.php');
-            $css = new IncludedFile ('style.css', $dbh);
+            $css = new IncludedFile ('css/style.css', $env);
+            $jquery = new IncludedFile(
+                    'https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js',
+                    $env
+            );
+            $css->include_file();
+            $jquery->include_file();
         ?>
-        <link rel="stylesheet" href="css/style.css" type="text/css">
+
     </head>
     <body>
+        <?php if($content_template != 'intro') { ?>
+            <img src = "css/bg.jpg"  id="background"  style='width: 100%; height: 100%; position: absolute; left: 0px; top: 0px; z-index:-1000;' />
+        <?php } ?>
         <?php include($env->basedir."$content_template.php"); ?>
     </body>
 </html>
