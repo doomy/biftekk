@@ -1,4 +1,4 @@
-// version 3
+// version 4
 
 $(function() {
     $('.fileinput').click(function() {
@@ -12,6 +12,13 @@ $(function() {
         $input.hide();
 
         $('#file_to_upload').click();
+    });
+
+    $('#add_new_button').click(function(){
+       $('#newline').show();
+       $(this).hide();
+       var $hidden = $("<input type='hidden' name='new_row' value='yes' />");
+       $(this).after($hidden);
     });
 });
 

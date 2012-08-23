@@ -1,6 +1,6 @@
 <?php
 class TableEdit {
-# version 7
+# version 8
 
     public function __construct($admin, $dbh, $table, $editable_columns) {
         $this->admin = $admin;
@@ -34,6 +34,8 @@ class TableEdit {
     private function _update() {
         $this->_update_files();
         $this->_update_from_post();
+        if (@$_POST['new_row'] == 'yes')
+            $this->_insert_new_line();
     }
     
     private function _update_files() {
@@ -64,12 +66,49 @@ class TableEdit {
         }
     }
 
+    private function _insert_new_line() {
+        foreach ($_POST as $post_key => $post_value) {
+            if (strpos($post_key, 'newcol_') > -1) {
+                $parts = explode('_', $post_key);
+                $column = $parts[1];
+                $to_insert[$column] = $post_value;
+            }
+        }
+        if (@count($to_insert) > 0) {
+                $sql = $this->_get_insert_sql($to_insert);
+                $this->dbh->query($sql);
+        }
+    }
+
     private function _get_update_sql_from_post($post_key, $post_value) {
         $parts = explode('_', $post_key);
         $column = $parts[1];
         $id = array_pop($parts);
         return "UPDATE $this->table_name
             SET $column='$post_value' WHERE id=$id";
+    }
+    
+    private function _get_insert_sql($to_insert) {
+        echo "aaa";
+        $sql = "INSERT INTO $this->table_name (";
+        $index = 0;
+        foreach($to_insert as $column => $value) {
+            $sql .= "$column";
+            if ($index < count($to_insert)-1)
+                $sql .= ", ";
+            $index++;
+        }
+        $sql .= ") VALUES(";
+        $index = 0;
+        foreach($to_insert as $column => $value) {
+            $sql .= "'$value'";
+            if ($index < count($to_insert)-1)
+                $sql .= ", ";
+            $index++;
+        }
+        $sql .= ");";
+
+        return $sql;
     }
     
     private function _get_filename_from_path($path) {

@@ -1,3 +1,5 @@
+/* version 2 */
+
 form {
     width: 250px;
     margin: 0 auto;
@@ -29,4 +31,8 @@ table tr th {
 
 .fileinput {
     width: 210px;
+}
+
+.hidden {
+    display: none;
 }
