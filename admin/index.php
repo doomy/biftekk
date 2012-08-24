@@ -1,5 +1,5 @@
 <?php
-// version 2
+// version 3
 
     require ('../lib/env.php');
     $env   = new Env('../');
@@ -14,9 +14,13 @@
     
     $filename_column = new EditableColumn('filename','file');
     $date_column     = new EditableColumn('date', 'text');
+    $gallery_link_column = new EditableColumn('gallery_link', 'text');
     $table_edit = new TableEdit(
-        $admin, $dbh, 'events', array($filename_column, $date_column
-    ));
+        $admin,
+        $dbh,
+        'events',
+        array( $filename_column, $date_column, $gallery_link_column )
+    );
     $admin->add_modules($table_edit);
     $admin->run();
 ?>
