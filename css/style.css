@@ -15,8 +15,10 @@ body img {
             position: relative;
            }
 
+
 .archiv img {
             width: 470px;
+            margin-top: 60px;
             }
             
 .hidden {display: none;}
