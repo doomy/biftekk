@@ -1,4 +1,4 @@
-<?php // version 3 ?>
+<?php // version 4 ?>
 You are logged in.
 <form action='' enctype="multipart/form-data" id='table_form' method='POST'>
     <table>
@@ -20,11 +20,11 @@ You are logged in.
                         $editable_type = get_editable_type($admin->template_vars, $column);
                         if ($editable_type) {
                             if ($editable_type=='file') {
-                                echo "<td><input type='text' value='$record' name='column_{$column}_id_$id' class='fileinput' id='file-$column-$id' /></td>";
+                                echo "<td><input type='text' value='$record' name='column__{$column}__id__$id' class='fileinput' id='file-$column-$id' /></td>";
                             }
                             else
                             {
-                                echo "<td><input type='$editable_type' name='column_{$column}_id_$id' value='$record' /></td>";
+                                echo "<td><input type='$editable_type' name='column__{$column}__id__$id' value='$record' /></td>";
                             }
                         }
                         else
@@ -39,11 +39,11 @@ You are logged in.
                 $editable_type = get_editable_type($admin->template_vars, $column);
                 if ($editable_type) {
                     if ($editable_type=='file') {
-                        echo "<td><input type='text' value='' name='newcol_{$column}_id_$id' placeholder='select a file...' class='fileinput' id='file-$column-$id' /></td>";
+                        echo "<td><input type='text' value='' name='newcol__{$column}__id__$id' placeholder='select a file...' class='fileinput' id='file-$column-$id' /></td>";
                     }
                     else
                     {
-                        echo "<td><input type='$editable_type' name='newcol_{$column}_id_$id' value='' /></td>";
+                        echo "<td><input type='$editable_type' name='newcol__{$column}__id__$id' value='' /></td>";
                     }
                 }
                 else

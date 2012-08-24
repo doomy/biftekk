@@ -1,6 +1,6 @@
 <?php
 class TableEdit {
-# version 8
+# version 9
 
     public function __construct($admin, $dbh, $table, $editable_columns) {
         $this->admin = $admin;
@@ -59,7 +59,7 @@ class TableEdit {
         foreach($_POST as $post_key => $post_value) {
             $sql = "";
 
-            if (strpos($post_key, 'column_') > -1) {
+            if (strpos($post_key, 'column__') > -1) {
                 $sql .= $this->_get_update_sql_from_post($post_key, $post_value);
             }
             $this->dbh->query($sql);
@@ -68,8 +68,8 @@ class TableEdit {
 
     private function _insert_new_line() {
         foreach ($_POST as $post_key => $post_value) {
-            if (strpos($post_key, 'newcol_') > -1) {
-                $parts = explode('_', $post_key);
+            if (strpos($post_key, 'newcol__') > -1) {
+                $parts = explode('__', $post_key);
                 $column = $parts[1];
                 $to_insert[$column] = $post_value;
             }
@@ -81,7 +81,7 @@ class TableEdit {
     }
 
     private function _get_update_sql_from_post($post_key, $post_value) {
-        $parts = explode('_', $post_key);
+        $parts = explode('__', $post_key);
         $column = $parts[1];
         $id = array_pop($parts);
         return "UPDATE $this->table_name
