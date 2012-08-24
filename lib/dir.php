@@ -1,6 +1,6 @@
 <?php
 class Dir {
-    # version 2
+    # version 3
     
     public function get_files_from_dir_by_extension($dir, $extension) {
         if ($all_files = $this->_get_files_from_dir($dir)) {
@@ -11,11 +11,12 @@ class Dir {
             }
             return $files;
         }
-        else die('could not read env config directory');
+        else return false;
     }
 
     private function _get_files_from_dir($dir) {
         if ($handle = opendir($dir)) {
+            $files = array();
             while ($file = readdir($handle)) {
                 if ($file != "." && $file != "..") {
                     $files[] = $file;
