@@ -1,7 +1,11 @@
 <div class='archiv'>
     <?php
-        foreach($file_names as $file_name) {
-            echo "<img src ='$file_name' /><br/>";
+        foreach($archive_files as $archive_file) {
+            if (@$archive_file['gallery_link'] != '')
+                echo "<a href='$archive_file[gallery_link]' target='_blank'>";
+            echo "<img src ='img/events/$archive_file[filename]' /><br/>";
+            if ($archive_file['gallery_link'] != '')
+                echo "</a>";
         }
     ?>
 </div>
