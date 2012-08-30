@@ -1,6 +1,6 @@
 <?php
 class Dir {
-    # version 3
+    # version 4
     
     public function get_files_from_dir_by_extension($dir, $extension) {
         if ($all_files = $this->_get_files_from_dir($dir)) {
@@ -13,9 +13,13 @@ class Dir {
         }
         else return false;
     }
+    
+    public function create_dir($dir_name) {
+        mkdir($dir_name);
+    }
 
     private function _get_files_from_dir($dir) {
-        if ($handle = opendir($dir)) {
+        if ($handle = @opendir($dir)) {
             $files = array();
             while ($file = readdir($handle)) {
                 if ($file != "." && $file != "..") {
