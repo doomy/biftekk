@@ -2,6 +2,8 @@
 
 class UnitTest_Dir {
 // version 1
+
+    private $TESTING_DIRECTORY_NAME = 'testing_directory';
     
     public function __construct() {
         require ('../../lib/env.php');
@@ -16,17 +18,29 @@ class UnitTest_Dir {
     }
     
     private function test_create_dir() {
-        $testing_directory_name = 'testing directory';
-        if (is_dir($testing_directory_name)) {
-            rmdir($testing_directory_name);
-        }
-        $this->dir_handler->create_dir($testing_directory_name);
-        $result = is_dir($testing_directory_name);
-        rmdir($testing_directory_name);
+        $this->_reset_testing_directory();
+        $this->dir_handler->create_dir($this->TESTING_DIRECTORY_NAME);
+        $result = is_dir($this->TESTING_DIRECTORY_NAME);
+        $this->dir_handler->delete_dir($this->TESTING_DIRECTORY_NAME);
         return $result;
     }
     
-    public function runtests() {
+    private function test_delete_dir() {
+        $this->_reset_testing_directory();
+        $this->dir_handler->create_dir($this->TESTING_DIRECTORY_NAME);
+        $this->dir_handler->delete_dir($this->TESTING_DIRECTORY_NAME);
+        $result = !is_dir($this->TESTING_DIRECTORY_NAME);
+        $this->_reset_testing_directory();
+        return $result;
+    }
+    
+    private function _reset_testing_directory() {
+        if (is_dir($this->TESTING_DIRECTORY_NAME)) {
+            rmdir($this->TESTING_DIRECTORY_NAME);
+        }
+    }
+    
+    public function run_tests() {
         $methods = get_class_methods('UnitTest_Dir');
         foreach ($methods as $method) {
             if(strpos($method, 'test_') > -1) {
@@ -40,6 +54,6 @@ class UnitTest_Dir {
 }
 
 $unittest_dir = new UnitTest_Dir();
-$unittest_dir->runtests();
+$unittest_dir->run_tests();
 
 ?>

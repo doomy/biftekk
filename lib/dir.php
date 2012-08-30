@@ -17,6 +17,10 @@ class Dir {
     public function create_dir($dir_name) {
         mkdir($dir_name);
     }
+    
+    public function delete_dir($dir_name) {
+        rmdir($dir_name);
+    }
 
     private function _get_files_from_dir($dir) {
         if ($handle = @opendir($dir)) {
